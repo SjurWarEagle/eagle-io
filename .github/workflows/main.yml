@@ -22,7 +22,7 @@ jobs:
         with:
           push: true
           tags: wareagledocker/eagle-io:latest
-          file: docker/Dockerfile
+          file: docker/Dockerfile-EagleIO
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
