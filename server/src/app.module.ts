@@ -1,19 +1,22 @@
 import {Module} from '@nestjs/common';
-import {AppController} from './app.controller';
-import {DirectoryService} from './directory.service';
-import {LoggerModule} from "nestjs-pino";
+import {DirectoryController} from './controllers/directory-controller';
+import {DirectoryService} from './services/directory.service';
+import {FileService} from "./services/file.service";
+import {ConfigurationService} from "./services/configuration.service";
+import {FilesController} from "./controllers/files.controller";
 
 @Module({
-  imports: [
-    LoggerModule.forRoot({
-      pinoHttp: {
-        level: process.env.NODE_ENV !== 'production' ? 'trace' : 'info',
-        prettyPrint: process.env.NODE_ENV !== 'production',
-        useLevelLabels: true,
-      },
-    }),
-        ],
-  controllers: [AppController],
-  providers: [DirectoryService],
+    imports: [
+    ],
+    controllers: [
+        DirectoryController,
+        FilesController,
+    ],
+    providers: [
+        DirectoryService,
+        FileService,
+        ConfigurationService,
+    ],
 })
-export class AppModule {}
+export class AppModule {
+}
