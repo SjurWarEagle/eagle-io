@@ -10,6 +10,7 @@ services:
     environment:
       - SERVER_PORT=4100
       - PLANTUML_SERVER_URL=http://picoweb:7450
+      - MINIO_SERVER_URL=http://minio:9000
     restart: unless-stopped
 
   minio:

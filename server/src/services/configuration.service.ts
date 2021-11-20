@@ -17,7 +17,7 @@ export class ConfigurationService {
                     accessKeyId: IAM_USER_KEY,
                     secretAccessKey: IAM_USER_SECRET,
                 },
-                endpoint: 'http://localhost:9000',
+                endpoint: process.env.MINIO_SERVER_URL,
             });
         }
         return this.client;
