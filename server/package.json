@@ -6,9 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "//docker:build": "docker-compose -f ../docker/docker-compose.yml build",
+    "docker:build": "docker-compose -f ../docker/docker-compose.yml build eagle-io",
 
-    "docker:up": "docker-compose -f ../docker/docker-compose.yml up -d",
+    "docker:up": "docker-compose -f ../docker/docker-compose.yml up",
     "docker:down": "docker-compose -f ../docker/docker-compose.yml down",
     "docker:ps": "docker ps",
     "docker:stat": "docker stats",

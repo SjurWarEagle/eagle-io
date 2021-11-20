@@ -1,0 +1,25 @@
+FROM node:16.13.0
+
+RUN apt update -y && \
+    apt install -y --no-install-recommends --no-install-suggests \
+    nginx \
+    ca-certificates &&\
+    rm -rf /var/cache/apt/ &&\
+    rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /project
+COPY . /project
+WORKDIR /project
+RUN cd
+RUN cd server && npm install && npm run build
+#TODO remove node_modules when the build is used to start
+#RUN cd server && npm install && npm run build && rm -fr node_modules
+
+COPY docker/scripts/start_all.sh /project/
+RUN chmod 777 /project/start_all.sh
+
+RUN rm -rf /etc/apt/apt.conf.d/90nginx
+#RUN service nginx restart
+EXPOSE 98
+#EXPOSE 3500
+STOPSIGNAL SIGTERM
+CMD ["/bin/bash", "-c", "/project/start_all.sh"]
