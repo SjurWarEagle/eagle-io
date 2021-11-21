@@ -27,7 +27,7 @@ export class DirectoryService {
         const response = await this.client.send(command);
 
         const rc = new DirectoryListing();
-        console.log('rc', rc);
+        // console.log('rc', rc);
         rc.name = directory;
         response.Contents.forEach(obj => {
             if (obj.Key.startsWith(directory)) {
@@ -46,7 +46,7 @@ export class DirectoryService {
         const response = await this.client.send(command);
 
         const rc = new DirectoryListing();
-        console.log('rc', rc);
+        // console.log('rc', rc);
         rc.name = "";
         response.Contents.forEach(obj => {
             rc.files.push(obj.Key);
