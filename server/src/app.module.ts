@@ -4,7 +4,7 @@ import {DirectoryService} from './services/directory.service';
 import {FileService} from "./services/file.service";
 import {ConfigurationService} from "./services/configuration.service";
 import {FilesController} from "./controllers/files.controller";
-import {RolesGuard} from "./roles.guard";
+import {RolesGuard} from "./auth/roles.guard";
 import {APP_GUARD} from "@nestjs/core";
 
 @Module({

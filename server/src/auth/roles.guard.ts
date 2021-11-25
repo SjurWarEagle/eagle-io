@@ -18,10 +18,16 @@ export class RolesGuard implements CanActivate {
         if (!requiredRoles) {
             return true;
         }
-        const rc = await axios.get(process.env.EAGLE_AUTH_SERVER_URL+'/v1/auth/roles');
+        const rc = await axios.get(process.env.EAGLE_AUTH_SERVER_URL + '/v1/auth/roles');
+        const userRoles = rc?.data as string[];
         console.log('requiredRoles', requiredRoles);
-        console.log('rc.data', rc.data);
-        return rc?.data?.includes(requiredRoles[0]);
-        // return true;
+        console.log('userRoles', userRoles);
+        const fullfillments: boolean[] = requiredRoles.map(reqRole => userRoles.indexOf(reqRole) !== -1);
+
+        let hasAllRoles: boolean = true;
+        for (let hasRole of fullfillments) {
+            hasAllRoles = hasAllRoles && hasRole;
+        }
+        return hasAllRoles;
     }
 }

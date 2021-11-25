@@ -5,6 +5,8 @@ import {GetObjectCommand, GetObjectCommandInput, PutObjectCommand, S3Client} fro
 import {ConfigurationService} from "../services/configuration.service";
 import {PutObjectCommandInput} from "@aws-sdk/client-s3/dist-types/commands/PutObjectCommand";
 import {Readable} from "stream";
+import {Roles} from "../auth/roles.decorator";
+import {Role} from "../auth/role.enum";
 
 require('dotenv').config()
 
@@ -28,6 +30,7 @@ export class FilesController {
     }
 
     @Get("read")
+    @Roles(Role.FileRead)
     async readFile(@Query('bucket') bucket: string,@Query('file') fileName: string): Promise<string> {
         const input:GetObjectCommandInput={
             Bucket:bucket,
@@ -41,6 +44,7 @@ export class FilesController {
     }
 
     @Post("write")
+    @Roles(Role.FileWrite)
     async writeFile(@Body() body: WriteFileRequest): Promise<void> {
         console.log('body',body);
         const input:PutObjectCommandInput={
