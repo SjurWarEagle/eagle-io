@@ -8,7 +8,9 @@
   "scripts": {
     "docker:build": "docker-compose -f ../docker/docker-compose.yml build eagle-io",
     "docker:up": "docker-compose -f ../docker/docker-compose.yml up",
+    "docker:up:minio": "docker-compose -f ../docker/docker-compose.yml up minio",
     "docker:down": "docker-compose -f ../docker/docker-compose.yml down",
+    "docker:down:minio": "docker-compose -f ../docker/docker-compose.yml down minio",
     "docker:ps": "docker ps",
     "docker:stat": "docker stats",
     "docker:ps2": "docker-compose -f ../docker/docker-compose.yml ps",
@@ -19,7 +21,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:dev:log": "nest start --watch|pino-elasticsearch --node http://localhost:9200",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"

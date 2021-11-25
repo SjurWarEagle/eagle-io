@@ -1,6 +1,8 @@
-import {Query, Controller, Get, HttpException} from '@nestjs/common';
+import {Headers, Query, Controller, Get, HttpException} from '@nestjs/common';
 import {DirectoryService} from '../services/directory.service';
 import {DirectoryListing} from "../types/directory-listing";
+import {Role} from "../role.enum";
+import {Roles} from "../roles.decorator";
 
 require('dotenv').config()
 
@@ -28,7 +30,10 @@ export class DirectoryController {
     }
 
     @Get("listAll")
-    async listAllFiles(@Query('bucket') bucket: string): Promise<DirectoryListing> {
+    @Roles(Role.Admin)
+    async listAllFiles(@Query('bucket') bucket: string, @Headers() headers): Promise<DirectoryListing> {
+        // console.log('listAllFiles');
+        // console.log(headers);
         if (!bucket) {
             throw new HttpException("No bucket requested.", 400);
         }
