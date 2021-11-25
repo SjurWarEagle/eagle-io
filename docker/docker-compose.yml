@@ -11,6 +11,7 @@ services:
       - SERVER_PORT=4100
       - PLANTUML_SERVER_URL=http://localhost:7450
       - MINIO_SERVER_URL=http://localhost:9000
+      - EAGLE_AUTH_SERVER_URL=http://eagle-auth:4150
     restart: unless-stopped
 
   minio:

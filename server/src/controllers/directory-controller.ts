@@ -25,7 +25,6 @@ export class DirectoryController {
             // throw new Error(`Directory ${directory} does not exist.`);
         }
 
-
         return await this.directoryService.listFiles(bucket, directory);
     }
 
