@@ -22,11 +22,11 @@ export class RolesGuard implements CanActivate {
         const authHeader = context.switchToHttp().getRequest().headers.authorization;
         console.log('RolesGuard.authHeader', authHeader);
 
-        const rc = await axios.get(process.env.EAGLE_AUTH_SERVER_URL + '/v1/auth/roles?authHeader='+authHeader);
+        const rc = await axios.get(process.env.EAGLE_AUTH_SERVER_URL + '/v1/auth/roles?authHeader=' + authHeader);
         const userRoles = rc?.data as string[];
         console.log('requiredRoles', requiredRoles);
         console.log('userRoles', userRoles);
-        const fullfillments: boolean[] = requiredRoles.map(reqRole => userRoles.indexOf(reqRole) !== -1);
+        const fullfillments: boolean[] = requiredRoles.map(reqRole => userRoles.indexOf(reqRole) !== -1 || userRoles.indexOf('Admin') !== -1);
 
         let hasAllRoles: boolean = true;
         for (let hasRole of fullfillments) {
